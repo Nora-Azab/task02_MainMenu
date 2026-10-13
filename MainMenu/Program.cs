@@ -1,12 +1,13 @@
 ﻿namespace MainMenu
 {
-  internal class Program
+    internal class Program
     {
         static void ShowMenu()
         {
             Console.WriteLine("====================== Menu List ======================");
             Console.WriteLine(" p - Print Numbers");
             Console.WriteLine(" a - Add a Number");
+            Console.WriteLine(" n - Add Range Of Numbers");
             Console.WriteLine(" m - Display Sum and Mean Of Numbers");
             Console.WriteLine(" s - Display The Smallest Number");
             Console.WriteLine(" l - Display The Largest Number");
@@ -40,12 +41,12 @@
                     case 'a':
                         AddNumber(arr);
                         break;
-                    //case 'p':
-
-                    //    break;
-                    //case 'p':
-
-                    //    break;
+                    case 'm':
+                        DisplayMean(arr);
+                        break;
+                    case 'n':
+                        AddRange(arr);
+                        break;
                     //case 'p':
 
                     //    break;
@@ -55,14 +56,14 @@
                     case 'q' or '0':
                         Console.WriteLine("Good bye :)");
                         return;
-                        //break;// 
+                    //break;// 
                     default:
                         Console.WriteLine("InValid Choice, Enter again");
                         break;
                 }
                 Console.ReadKey(true);//بستخدمها عشان في الكونسل يقف اشوف النتيجة لحد ما اضغط اي مفتاح في الكيبورد فيعيد اللوب
 
-            }while(true);
+            } while (true);
 
         }
         //======================================================
@@ -70,7 +71,7 @@
         static void PrintNumbers(List<int> arr)
         {
             Console.Write("[ ");
-            for(int i=0; i<arr.Count; i++)
+            for (int i = 0; i < arr.Count; i++)
             {
                 Console.Write($"{arr[i]}  ");
             }
@@ -79,11 +80,34 @@
         //=====================
         static void AddNumber(List<int> arr)
         {
-            Console.Write("Enter the number :   ");
+            Console.Write("Enter the number =>  ");
             int num = Convert.ToInt32(Console.ReadLine());
 
             arr.Add(num);
             Console.WriteLine($" {num} is added :)");
         }
+        //=====================
+        static void AddRange(List<int> arr)
+        {
+            Console.Write("Enter all the numbers seperated with a space =>  ");
+            string[] inputs = Console.ReadLine().Split(" ");
+            for(int i = 0;i < inputs.Length;i++)
+                arr.Add(Convert.ToInt32(inputs[i]));
+            Console.WriteLine("The numbers are added :)");
+
+        }
+        //=====================
+        static void DisplayMean(List<int> arr)
+        {
+            int sum = 0;
+            for (int i = 0; i < arr.Count; i++)
+                sum += arr[i];
+            Console.WriteLine($"Sum = {sum} :::: Avarage = {sum / arr.Count}");
+        }
+        //=====================
+
+
+
+
     }
 }
