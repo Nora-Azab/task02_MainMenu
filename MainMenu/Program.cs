@@ -19,6 +19,7 @@
             Console.WriteLine(" To Quit Any Time Press '0' OR 'q'");
             Console.WriteLine("=======================================================");
         }
+        //======================================================
         static void Main(string[] args)
         {
             char op;
@@ -36,6 +37,9 @@
                     case 'p':
                         PrintNumbers(arr);
                         break;
+                    case 'a':
+                        AddNumber(arr);
+                        break;
                     //case 'p':
 
                     //    break;
@@ -45,19 +49,20 @@
                     //case 'p':
 
                     //    break;
-                    //case 'p':
-
-                    //    break;
-                    //case 'p':
-
-                    //    break;
+                    // it's better to write the condition of finishing here instead of do-while(...)
+                    //لأنه كده مش هينزل تاني وينفذ مثلا اي كود بعد الاسواتش ولكن هينهي المين فانكشن خالص
+                    //ونفس السبب اني معملتش بريك وعملت ريتيرن
+                    case 'q' or '0':
+                        Console.WriteLine("Good bye :)");
+                        return;
+                        //break;// 
                     default:
                         Console.WriteLine("InValid Choice, Enter again");
                         break;
                 }
                 Console.ReadKey(true);//بستخدمها عشان في الكونسل يقف اشوف النتيجة لحد ما اضغط اي مفتاح في الكيبورد فيعيد اللوب
 
-            }while(op !='q' && op !='0');
+            }while(true);
 
         }
         //======================================================
@@ -70,6 +75,15 @@
                 Console.Write($"{arr[i]}  ");
             }
             Console.Write("]");
+        }
+        //=====================
+        static void AddNumber(List<int> arr)
+        {
+            Console.Write("Enter the number :   ");
+            int num = Convert.ToInt32(Console.ReadLine());
+
+            arr.Add(num);
+            Console.WriteLine($" {num} is added :)");
         }
     }
 }
