@@ -47,6 +47,12 @@
                     case 'n':
                         AddRange(arr);
                         break;
+                    case 's':
+                        DisplaySmallest(arr);
+                        break;
+                    case 'l':
+                        DisplayLargest(arr);
+                        break;
                     //case 'p':
 
                     //    break;
@@ -90,7 +96,7 @@
         static void AddRange(List<int> arr)
         {
             Console.Write("Enter all the numbers seperated with a space =>  ");
-            string[] inputs = Console.ReadLine().Split(" ");
+            string[] inputs = Console.ReadLine().Trim().Split(" ");
             for(int i = 0;i < inputs.Length;i++)
                 arr.Add(Convert.ToInt32(inputs[i]));
             Console.WriteLine("The numbers are added :)");
@@ -103,6 +109,24 @@
             for (int i = 0; i < arr.Count; i++)
                 sum += arr[i];
             Console.WriteLine($"Sum = {sum} :::: Avarage = {sum / arr.Count}");
+        }
+        //=====================
+        static void DisplaySmallest(List<int> arr)
+        {
+            int min = arr[0];// or    int.MaxValue 
+            for (int i = 0; i < arr.Count; i++)
+                if (arr[i] < min)
+                    min = arr[i];
+            Console.WriteLine($"The Smallest Number is {min}");
+        }
+        //=====================
+        static void DisplayLargest(List<int> arr)
+        {
+            int max = arr[0];// or    int.MinValue 
+            for (int i = 0; i < arr.Count; i++)
+                if (arr[i] > max)
+                    max = arr[i];
+            Console.WriteLine($"The Largest Number is {max}");
         }
         //=====================
 
