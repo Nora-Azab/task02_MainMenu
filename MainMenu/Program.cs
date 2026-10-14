@@ -10,19 +10,19 @@ namespace MainMenu
         static void ShowMenu()
         {
             Console.WriteLine("====================== Menu List ======================");
-            Console.WriteLine(" p - Print Numbers");
-            Console.WriteLine(" a - Add a Number");
-            Console.WriteLine(" n - Add Range Of Numbers");
-            Console.WriteLine(" m - Display Sum and Mean Of Numbers");
-            Console.WriteLine(" s - Display The Smallest Number");
-            Console.WriteLine(" l - Display The Largest Number");
-            Console.WriteLine(" f - Find a Number (Choice The Algorithm)");// there is subMenu else => [linear] & [binary search]
+            Console.WriteLine(" p - Print Numbers");// done
+            Console.WriteLine(" a - Add a Number");// done
+            Console.WriteLine(" n - Add Range Of Numbers");// done
+            Console.WriteLine(" m - Display Sum and Mean Of Numbers");// done
+            Console.WriteLine(" s - Display The Smallest Number");// done
+            Console.WriteLine(" l - Display The Largest Number");// done
+            Console.WriteLine(" f - Find a Number (Choice The Algorithm)");//done // there is subMenu else => [linear] & [binary search]
             Console.WriteLine(" c - Clear The Whole List");
             Console.WriteLine(" d - Delete a Number");
             Console.WriteLine(" t - Sort (Choice The Algorithm)");// subMenu => [selection , bubble , insertion , merge]
             Console.WriteLine(" r - Reverse Numbers");
-            Console.WriteLine(" v - Remove Dublicates");
-            Console.WriteLine(" To Quit Any Time Press '0' OR 'q'");
+            Console.WriteLine(" v - Remove Dublicates");//done
+            Console.WriteLine(" To Quit Any Time Press '0' OR 'q'");//done
             Console.WriteLine("=======================================================");
         }
         //======================================================
@@ -76,6 +76,9 @@ namespace MainMenu
                         break;
                     case 'v':
                         RemoveDublicates(ref arr);
+                        break;
+                    case 'r':
+                        ReverseList(ref arr);
                         break;
                     //case 'p':
 
@@ -424,6 +427,17 @@ namespace MainMenu
 
             oldList = newList;//  وبكده أتغير العنوان بتاع الريفرنس ال كان موجود في الاستاك 
             //وعدش في وجود للأراي القديمة
+        }
+        //=====================
+        static void ReverseList(ref List<int> oldList)
+        {
+            List<int> reversedList = new List<int>();
+            for(int i=oldList.Count-1; i>=0; --i)
+            {
+                reversedList.Add(oldList[i]);
+            }
+            oldList = reversedList;
+            Console.WriteLine("the list has been reversed :)");
         }
         //=====================
 
