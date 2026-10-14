@@ -1,4 +1,6 @@
-﻿namespace MainMenu
+﻿using System.ComponentModel;
+
+namespace MainMenu
 {
     internal class Program
     {
@@ -71,6 +73,9 @@
                             goBack = false;
                             continue;
                         }
+                        break;
+                    case 'v':
+                        RemoveDublicates(ref arr);
                         break;
                     //case 'p':
 
@@ -280,7 +285,7 @@
                     BubbleSort(list);
                 else if (choice == '3')
                     InsertionSort(list);
-                //else if (choice == '4')
+                //else if (choice == '4') //TODO
                 //    MergeSort(list);
                 else if (choice == '0')
                 {
@@ -403,6 +408,22 @@
             //Console.WriteLine();
             Console.WriteLine("List has been sorted using Insertion Sort.");
 
+        }
+        //=====================
+        static void RemoveDublicates(ref List<int>oldList) // ref : to allow me to change the address it self 
+            // دلوقتي انا مش معايا نسخة ولكن معايا المكان ال اقدر اعدل فيه العنوان ال بيشاور عليه
+        {
+            HashSet<int> uniqueNumbers = new HashSet<int>();
+            List<int> newList = new List<int>();
+
+            for(int i=0; i<oldList.Count; ++i)
+            {
+                if (uniqueNumbers.Add(oldList[i]))
+                    newList.Add(oldList[i]);
+            }
+
+            oldList = newList;//  وبكده أتغير العنوان بتاع الريفرنس ال كان موجود في الاستاك 
+            //وعدش في وجود للأراي القديمة
         }
         //=====================
 
