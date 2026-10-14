@@ -154,7 +154,7 @@
                 if (choice == 'l')
                     LinearSearchFind(list);
                 else if (choice == 'b')
-                    Console.WriteLine("binary");
+                    BinarySearchFind(list);
                 else if (choice == '0')
                 {
                     Console.WriteLine("u will go to the main menu :)");
@@ -196,8 +196,43 @@
                 Console.WriteLine($"{num} is found at position {index + 1}");
         }
         //=====================
+        static int BinarySearch(List<int> list , int target)
+        {
+            int l = 0;
+            int r=list.Count-1;
+            int mid;
+            while(l <= r)
+            {
+                //mid = (l + r) / 2;
+                mid = l + (r - l) / 2; // to avoid overflow for (int.MaxValue + int.MaxValue)   
+                if (list[mid] == target)
+                    return mid;
+                else if (list[mid] < target)
+                    l = mid + 1;
+                else if (list[mid] > target)
+                    r = mid - 1;
+            }
+            return -1;
+        }
+        //=====================
+        static void BinarySearchFind(List<int> list)
+        {
+            Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_");
+            Console.WriteLine("\nU Know? We Must Sort The List First Then Search :)");
+            Console.WriteLine("So i will leave the original list and make BS on another sorted list from numbers of the origional :) :)");
+            Console.WriteLine("\n-_-_-_-_-_-_-_-_-_-_-_-_\n");
+            List<int> sortedList = new List<int>();
+            sortedList = list;
+            sortedList.Sort();//معلش هنا استخدمت الجاهزة على ما أعمل الميثود كمان شويه
+            //-------------
+            int num = ReadNumberForSearch();
+            int index = BinarySearch(sortedList, num);
 
-
+            if (index == -1)
+                Console.WriteLine($"{num} is not found");
+            else
+                Console.WriteLine($"{num} is found at position {index + 1}");
+        }
 
 
 
