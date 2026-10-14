@@ -2,6 +2,9 @@
 {
     internal class Program
     {
+        static bool goBack = false;//عملته عشان لو في رجوع من أي منيو تانية يرجع على طول من غير ما
+                                   // dothis line  Console.WriteLine("Press any key to continue :)");
+                                   //على مستوى الكلاس كله عشان تستخدمها اي ميثود
         static void ShowMenu()
         {
             Console.WriteLine("====================== Menu List ======================");
@@ -14,7 +17,7 @@
             Console.WriteLine(" f - Find a Number (Choice The Algorithm)");// there is subMenu else => [linear] & [binary search]
             Console.WriteLine(" c - Clear The Whole List");
             Console.WriteLine(" d - Delete a Number");
-            Console.WriteLine(" s - Sort (Choice The Algorithm)");// subMenu => [selection , bubble , insertion , merge]
+            Console.WriteLine(" t - Sort (Choice The Algorithm)");// subMenu => [selection , bubble , insertion , merge]
             Console.WriteLine(" r - Reverse Numbers");
             Console.WriteLine(" v - Remove Dublicates");
             Console.WriteLine(" To Quit Any Time Press '0' OR 'q'");
@@ -55,6 +58,19 @@
                         break;
                     case 'f':
                         FindMenu(arr);
+                        if (goBack)
+                        {
+                            goBack = false;
+                            continue;
+                        }
+                        break;
+                    case 't':
+                        SortMenu(arr);
+                        if (goBack)
+                        {
+                            goBack = false;
+                            continue;
+                        }
                         break;
                     //case 'p':
 
@@ -85,7 +101,7 @@
             {
                 Console.Write($"{arr[i]}  ");
             }
-            Console.Write("]");
+            Console.Write("]\n");
         }
         //=====================
         static void AddNumber(List<int> arr)
@@ -101,7 +117,7 @@
         {
             Console.Write("Enter all the numbers seperated with a space =>  ");
             string[] inputs = Console.ReadLine().Trim().Split(" ");
-            for(int i = 0;i < inputs.Length;i++)
+            for (int i = 0; i < inputs.Length; i++)
                 arr.Add(Convert.ToInt32(inputs[i]));
             Console.WriteLine("The numbers are added :)");
 
@@ -157,12 +173,13 @@
                     BinarySearchFind(list);
                 else if (choice == '0')
                 {
+                    goBack = true;
                     Console.WriteLine("u will go to the main menu :)");
                     return; // go to the previous menu 
                 }
                 else
                     Console.WriteLine("InValid Choice, Try Again:)");
-
+                Console.WriteLine("hhhhhhhhhh");
                 Console.WriteLine("Press any key to continue :)");
                 Console.ReadKey(true);
             }
@@ -196,12 +213,12 @@
                 Console.WriteLine($"{num} is found at position {index + 1}");
         }
         //=====================
-        static int BinarySearch(List<int> list , int target)
+        static int BinarySearch(List<int> list, int target)
         {
             int l = 0;
-            int r=list.Count-1;
+            int r = list.Count - 1;
             int mid;
-            while(l <= r)
+            while (l <= r)
             {
                 //mid = (l + r) / 2;
                 mid = l + (r - l) / 2; // to avoid overflow for (int.MaxValue + int.MaxValue)   
@@ -233,6 +250,80 @@
             else
                 Console.WriteLine($"{num} is found at position {index + 1}");
         }
+        //=====================
+        //=====================
+        //Sorting Algorithms:
+        static void ShowSortMenu()
+        {
+            Console.WriteLine("===================Sort Menu===================");
+            Console.WriteLine(" 1 - Selection Sort");
+            Console.WriteLine(" 2 - Bubble Sort");
+            Console.WriteLine(" 3 - Insertion Sort");
+            Console.WriteLine(" 4 - Merge Sort");
+            Console.WriteLine(" 0 - Back");
+            Console.WriteLine("===============================================");
+        }
+        //=====================
+        static void SortMenu(List<int> list)
+        {
+            while (true)
+            {
+                Console.Clear();
+                ShowSortMenu();
+                Console.Write("Enter Your Choice => ");
+                char choice = Convert.ToChar(Console.ReadLine().Trim().ToLower());
+                if (choice == '1')
+                    SelectionSort(list);
+                //else if (choice == '2')
+                //    BubbleSort();
+                //else if (choice == '3')
+                //    InsertionSort();
+                //else if (choice == '4')
+                //    MergeSort();
+                else if (choice == '0')
+                {
+                    goBack = true;
+                    Console.WriteLine("u will go to the main menu :)");
+                    return; // go to the previous menu 
+                }
+                else
+                    Console.WriteLine("InValid Choice, Try Again:)");
+                Console.WriteLine("Press any key to continue :)");
+                Console.ReadKey(true);
+            }
+        }
+        //=====================
+        static void SelectionSort(List<int> list)
+        {
+            //هنا نقطة مهمة جدا .. انه الليست بالفعل اتغيرت لأن دلوقتي انا كان معايا 
+            //its ref [in stack] => which point to the list [in heap]
+            int position, temp;
+
+            for (int i = 0; i < list.Count - 1; i++)//tour
+            {
+
+                position = i;
+                for (int j = i + 1; j < list.Count; j++)
+                {
+                    if (list[j] < list[position])
+                    {
+                        position = j;
+                    }
+                }
+                //position == i ://مكنش في داعي للفة دي والرقم في مكانه الصحصح
+                if (position != i)
+                {
+                    //swapping:
+
+                    temp = list[i];
+                    list[i] = list[position];
+                    list[position] = temp;
+                }
+            }
+            Console.WriteLine("List has been sorted using Selection Sort.");
+
+        }
+        //=====================
 
 
 
