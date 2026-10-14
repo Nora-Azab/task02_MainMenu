@@ -81,6 +81,14 @@ namespace MainMenu
                         //ReverseList(ref arr);
                         ReverseList(arr);
                         break;
+                    case 'd':
+                        DeleteMenu(ref arr);
+                        if(goBack)
+                        {
+                            goBack = false;
+                            continue;
+                        }
+                        break;
                     //case 'p':
 
                     //    break;
@@ -458,13 +466,91 @@ namespace MainMenu
                 r--;
             }
             Console.WriteLine("the list has been reversed :)");
-        }   
-
+        }
         //=====================
+        //=====================
+        //Delete :
+        static int ReadNumber() //TODO: use it for the other methods 
+        {
+            Console.Write("Enter the number =>  ");
+            return Convert.ToInt32(Console.ReadLine());
+        }
+        //=====================
+        static void ShowDeleteMenu()
+        {
+            Console.WriteLine("===================Delete Menu===================\n");
+            Console.WriteLine(" a - Delete All Occurrences Of A Number");
+            Console.WriteLine(" o - Delete One Occurrence Of A Number");
+            Console.WriteLine(" 0 - Back");
+            Console.WriteLine("=================================================\n");
+        }
+        //=====================
+        static void DeleteMenu(ref List<int> list )
+        {
+            if(list.Count == 0)
+            {
+                Console.WriteLine("The List is empty :)");
+                return;
+            }
+            
+            while(true)
+            {
+                Console.Clear();
+                ShowDeleteMenu();
+                Console.Write("Enter Your Choice => ");
+                char choice = Convert.ToChar(Console.ReadLine().Trim().ToLower());
+                if (choice == 'a' || choice == 'o')
+                {
+                    int num = ReadNumber();
+                    Delete(ref list, num, choice);
+                }
+                else if (choice == '0')
+                {
+                    goBack = true;
+                    Console.WriteLine("u will go to the main menu :)");
+                    return; // go to the previous menu 
+                }
+                else
+                    Console.WriteLine("InValid Choice, Try Again:)");
+                Console.WriteLine("Press any key to continue :)");
+                Console.ReadKey(true);
+            }
 
+        }
+        //=====================
+        static void Delete(ref List<int> oldList, int num, char choice)
+        {
+            bool found = false;
+            bool firstRemoved = false;
+            List<int> newList = new List<int>();
 
+            for(int i=0; i<oldList.Count; i++)
+            {
+                if (oldList[i]==num)
+                {
+                    found = true;
+                    if(!firstRemoved && choice == 'o')// هيدخل هنا مرة وحدة بس في حالة وجود الرقم فعلا
+                    {
+                        Console.WriteLine($"one occurrence of {num} has been deleted :)");
+                        firstRemoved = true;
+                        continue;
+                    }
+                    else if(choice=='a')
+                        continue; 
 
+                }
+                newList.Add(oldList[i]);// to add  الارقام ال مش بتساوي الرقم +    if i need to remove one occurance only and add thr rest of {num}s :)
 
+            }
+            if (!found)
+                Console.WriteLine($"{num} is not found :)");
+            if(choice=='a')
+                Console.WriteLine($"all occurrences of {num} have been deleted :)");
+
+            oldList = newList;
+
+        }
+        //=====================
 
     }
 }
