@@ -253,15 +253,17 @@
         //=====================
         //=====================
         //Sorting Algorithms:
+        //في نقطة مهمة .. انا عملت الجورزمات السورتينج دي من يومين لواحدها ولسه واخداهم الأن ل هنا جاهزين
         static void ShowSortMenu()
         {
             Console.WriteLine("===================Sort Menu===================");
+            Console.WriteLine("================Ascending Sort=================\n");
             Console.WriteLine(" 1 - Selection Sort");
             Console.WriteLine(" 2 - Bubble Sort");
             Console.WriteLine(" 3 - Insertion Sort");
             Console.WriteLine(" 4 - Merge Sort");
             Console.WriteLine(" 0 - Back");
-            Console.WriteLine("===============================================");
+            Console.WriteLine("\n===============================================");
         }
         //=====================
         static void SortMenu(List<int> list)
@@ -274,12 +276,12 @@
                 char choice = Convert.ToChar(Console.ReadLine().Trim().ToLower());
                 if (choice == '1')
                     SelectionSort(list);
-                //else if (choice == '2')
-                //    BubbleSort();
+                else if (choice == '2')
+                    BubbleSort(list);
                 //else if (choice == '3')
-                //    InsertionSort();
+                //    InsertionSort(list);
                 //else if (choice == '4')
-                //    MergeSort();
+                //    MergeSort(list);
                 else if (choice == '0')
                 {
                     goBack = true;
@@ -324,6 +326,43 @@
 
         }
         //=====================
+        static void BubbleSort(List<int> list)
+        {
+            //foreach (int ele in list) Console.Write($"{ele}  ");
+
+            int loop = list.Count - 1;
+            int tmp;
+            bool swapped;
+
+            while (loop > 0)
+            {
+                //في كل لفة في فرصة انه بدل ما نكمل الالجورزم .. انه يوقف لأنه خلاص الاّراي بالفعل اترتبت
+                swapped = false;
+                for (int i = 0; i < loop; i++)
+                {
+                    if (list[i] > list[i + 1])
+                    {
+                        //swapping
+                        tmp = list[i];
+                        list[i] = list[i + 1];
+                        list[i + 1] = tmp;
+
+                        swapped = true;
+
+                    }
+                }
+                if (!swapped) break;
+                loop--;
+            }
+            //Console.WriteLine();
+            //foreach (int ele in list) Console.Write($"{ele}  ");
+            //Console.WriteLine();
+
+            Console.WriteLine("List has been sorted using Bubble Sort.");
+
+        }
+        //=====================
+
 
 
 
