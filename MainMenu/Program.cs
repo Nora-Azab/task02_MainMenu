@@ -278,8 +278,8 @@
                     SelectionSort(list);
                 else if (choice == '2')
                     BubbleSort(list);
-                //else if (choice == '3')
-                //    InsertionSort(list);
+                else if (choice == '3')
+                    InsertionSort(list);
                 //else if (choice == '4')
                 //    MergeSort(list);
                 else if (choice == '0')
@@ -362,6 +362,50 @@
 
         }
         //=====================
+        static void InsertionSort(List<int> list)
+        {
+            //foreach (int i in list) Console.Write($"{i}  ");
+            int key, j;
+            for (int i = 1; i < list.Count; i++)//i=1 : consider the first element is sorted already
+            {
+                key = list[i];
+
+                /// for(j=i-1; j>=0; j--)//looping on the sorted list(من يمين ل شمال)
+                /// {
+                ///     if(key < arr[j])
+                ///     {
+                ///         //will shift arr[j] to the next index ->
+                ///         arr[j + 1] = arr[j];// become this index empty :)
+                ///     }
+                ///     else
+                ///     {
+                ///         break;// wil not continue looping => already the arr i loop in reversely is sorted so all the rest elements are smaller
+                ///     }
+                /// }
+
+                j = i - 1;
+
+                if (key >= list[j]) continue; //it's correct place already :)  => goog if the arr is sorted :)
+                // j>=0 must be first =>&& make  short-circuit evaluation => and if(j==-1)-> arr[-1] -> will make exception outOfRange
+                while (j >= 0 && key < list[j]) //looping on the sorted list(من يمين ل شمال)
+                {
+                    //shifting:
+                    list[j + 1] = list[j];// become this index empty :)
+                    j--;
+                }
+                //this for => if u reached arr[0] -> the end of the sorted arr and ended the comparison
+                ////or        if u reached that the current element is smaller than the key so => we reached the correct place for [key]
+                list[j + 1] = key;
+            }
+
+            //Console.WriteLine();
+            //foreach (int i in list) Console.Write($"{i}  ");
+            //Console.WriteLine();
+            Console.WriteLine("List has been sorted using Insertion Sort.");
+
+        }
+        //=====================
+
 
 
 
