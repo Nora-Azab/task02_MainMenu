@@ -297,8 +297,8 @@ namespace MainMenu
                     BubbleSort(list);
                 else if (choice == '3')
                     InsertionSort(list);
-                //else if (choice == '4') //TODO
-                //    MergeSort(list);
+                else if (choice == '4') //TODO
+                    MergeSort(list , 0 , list.Count-1);
                 else if (choice == '0')
                 {
                     goBack = true;
@@ -420,6 +420,49 @@ namespace MainMenu
             //Console.WriteLine();
             Console.WriteLine("List has been sorted using Insertion Sort.");
 
+        }
+        //=====================
+        static void Sort(ref List<int> list , int start , int mid , int end)
+        {
+            int i=start;
+            int j=mid+1;
+            int k = start; //0 //for the new list:)
+            int[] newList = new int[list.Count]; 
+
+            while (i<=mid && j<=end)
+            {
+                if(list[i] <= list[j])
+                {
+                    newList[k++] = list[i++];
+                    //i++;
+                    //k++;        
+                }
+                else
+                    newList[k++] = list[j++];
+            }
+            //عشان لو خلصت واحدة من الليستين .. يبقى نضيف الباقي من التانية
+            while (i <= mid)
+                newList[k++] = list[i++];
+            while (j <= end)
+                newList[k++] = list[j++];
+
+            list = newList.ToList();// to convert the array to list again
+
+        }
+        //=====================
+        static void MergeSort(List<int> list ,int start , int end) //complexity : O(n log n) 
+        {
+
+            if(start < end)
+            {
+                int mid = (start + end) / 2;
+                MergeSort(list, start, mid);
+                MergeSort(list, mid+1, end);
+                Sort(ref list , start , mid , end);
+
+            }
+            
+            Console.WriteLine("list has been sorted using Merge Sort");
         }
         //=====================
         static void RemoveDublicates(ref List<int> oldList) // ref : to allow me to change the address it self 
