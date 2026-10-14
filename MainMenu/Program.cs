@@ -16,11 +16,11 @@ namespace MainMenu
             Console.WriteLine(" m - Display Sum and Mean Of Numbers");// done
             Console.WriteLine(" s - Display The Smallest Number");// done
             Console.WriteLine(" l - Display The Largest Number");// done
-            Console.WriteLine(" f - Find a Number (Choice The Algorithm)");//done // there is subMenu else => [linear] & [binary search]
+            Console.WriteLine(" f - Find a Number (Choice The Algorithm)");//done        // there is subMenu else => [linear] & [binary search]
             Console.WriteLine(" c - Clear The Whole List");
             Console.WriteLine(" d - Delete a Number");
-            Console.WriteLine(" t - Sort (Choice The Algorithm)");// subMenu => [selection , bubble , insertion , merge]
-            Console.WriteLine(" r - Reverse Numbers");
+            Console.WriteLine(" t - Sort (Choice The Algorithm)");//done TODO: merge     // subMenu => [selection , bubble , insertion , merge]
+            Console.WriteLine(" r - Reverse Numbers");//done
             Console.WriteLine(" v - Remove Dublicates");//done
             Console.WriteLine(" To Quit Any Time Press '0' OR 'q'");//done
             Console.WriteLine("=======================================================");
@@ -78,7 +78,8 @@ namespace MainMenu
                         RemoveDublicates(ref arr);
                         break;
                     case 'r':
-                        ReverseList(ref arr);
+                        //ReverseList(ref arr);
+                        ReverseList(arr);
                         break;
                     //case 'p':
 
@@ -439,6 +440,26 @@ namespace MainMenu
             oldList = reversedList;
             Console.WriteLine("the list has been reversed :)");
         }
+        //=====================
+        static void ReverseList(List<int> list)
+        {
+            // two pointer techinque:)
+            int l = 0;
+            int r=list.Count-1;
+            int tmp;
+            while (l < r)
+            {
+                //swapping
+                tmp = list[l];
+                list[l] = list[r];
+                list[r] = tmp;
+
+                l++;
+                r--;
+            }
+            Console.WriteLine("the list has been reversed :)");
+        }   
+
         //=====================
 
 
