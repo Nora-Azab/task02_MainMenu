@@ -53,6 +53,9 @@
                     case 'l':
                         DisplayLargest(arr);
                         break;
+                    case 'f':
+                        FindMenu(arr);
+                        break;
                     //case 'p':
 
                     //    break;
@@ -67,6 +70,7 @@
                         Console.WriteLine("InValid Choice, Enter again");
                         break;
                 }
+                Console.WriteLine("Press any key to continue :)");
                 Console.ReadKey(true);//بستخدمها عشان في الكونسل يقف اشوف النتيجة لحد ما اضغط اي مفتاح في الكيبورد فيعيد اللوب
 
             } while (true);
@@ -129,6 +133,70 @@
             Console.WriteLine($"The Largest Number is {max}");
         }
         //=====================
+        static void ShowFindMenu()
+        {
+            Console.WriteLine("===================Find Menu===================");
+            Console.WriteLine(" l - Find Using (Linear Search)");
+            Console.WriteLine(" b - Find Using (Binary Search)");
+            Console.WriteLine(" 0 - Back");
+            Console.WriteLine("===============================================");
+        }
+        //=====================
+        static void FindMenu(List<int> list)
+        {
+            while (true)
+            {
+                Console.Clear();
+                ShowFindMenu();
+                Console.Write("Enter Your Choice => ");
+                char choice = Convert.ToChar(Console.ReadLine().Trim().ToLower());
+
+                if (choice == 'l')
+                    LinearSearchFind(list);
+                else if (choice == 'b')
+                    Console.WriteLine("binary");
+                else if (choice == '0')
+                {
+                    Console.WriteLine("u will go to the main menu :)");
+                    return; // go to the previous menu 
+                }
+                else
+                    Console.WriteLine("InValid Choice, Try Again:)");
+
+                Console.WriteLine("Press any key to continue :)");
+                Console.ReadKey(true);
+            }
+        }
+        //=====================
+        static int ReadNumberForSearch()
+        {
+            Console.Write("Enter num to search for => ");
+            int num = Convert.ToInt32(Console.ReadLine());
+            return num;
+        }
+        //=====================
+        static int LinearSearch(List<int> list, int target)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i] == target)
+                    return i;
+            }
+            return -1;
+        }
+        //=====================
+        static void LinearSearchFind(List<int> list)
+        {
+            int num = ReadNumberForSearch();
+            int index = LinearSearch(list, num);
+
+            if (index == -1)
+                Console.WriteLine($"{num} is not found");
+            else
+                Console.WriteLine($"{num} is found at position {index + 1}");
+        }
+        //=====================
+
 
 
 
