@@ -17,8 +17,8 @@ namespace MainMenu
             Console.WriteLine(" s - Display The Smallest Number");// done
             Console.WriteLine(" l - Display The Largest Number");// done
             Console.WriteLine(" f - Find a Number (Choice The Algorithm)");//done        // there is subMenu else => [linear] & [binary search]
-            Console.WriteLine(" c - Clear The Whole List");
-            Console.WriteLine(" d - Delete a Number");
+            Console.WriteLine(" c - Clear The Whole List");//done
+            Console.WriteLine(" d - Delete a Number");//done                            // there is subMenu else => [delete all occurrences] & [delete one occurrence]
             Console.WriteLine(" t - Sort (Choice The Algorithm)");//done TODO: merge     // subMenu => [selection , bubble , insertion , merge]
             Console.WriteLine(" r - Reverse Numbers");//done
             Console.WriteLine(" v - Remove Dublicates");//done
@@ -83,15 +83,15 @@ namespace MainMenu
                         break;
                     case 'd':
                         DeleteMenu(ref arr);
-                        if(goBack)
+                        if (goBack)
                         {
                             goBack = false;
                             continue;
                         }
                         break;
-                    //case 'p':
-
-                    //    break;
+                    case 'c':
+                        ClearList(ref arr);
+                        break;
                     // it's better to write the condition of finishing here instead of do-while(...)
                     //لأنه كده مش هينزل تاني وينفذ مثلا اي كود بعد الاسواتش ولكن هينهي المين فانكشن خالص
                     //ونفس السبب اني معملتش بريك وعملت ريتيرن
@@ -422,13 +422,13 @@ namespace MainMenu
 
         }
         //=====================
-        static void RemoveDublicates(ref List<int>oldList) // ref : to allow me to change the address it self 
-            // دلوقتي انا مش معايا نسخة ولكن معايا المكان ال اقدر اعدل فيه العنوان ال بيشاور عليه
+        static void RemoveDublicates(ref List<int> oldList) // ref : to allow me to change the address it self 
+                                                            // دلوقتي انا مش معايا نسخة ولكن معايا المكان ال اقدر اعدل فيه العنوان ال بيشاور عليه
         {
             HashSet<int> uniqueNumbers = new HashSet<int>();
             List<int> newList = new List<int>();
 
-            for(int i=0; i<oldList.Count; ++i)
+            for (int i = 0; i < oldList.Count; ++i)
             {
                 if (uniqueNumbers.Add(oldList[i]))
                     newList.Add(oldList[i]);
@@ -441,7 +441,7 @@ namespace MainMenu
         static void ReverseList(ref List<int> oldList)
         {
             List<int> reversedList = new List<int>();
-            for(int i=oldList.Count-1; i>=0; --i)
+            for (int i = oldList.Count - 1; i >= 0; --i)
             {
                 reversedList.Add(oldList[i]);
             }
@@ -453,7 +453,7 @@ namespace MainMenu
         {
             // two pointer techinque:)
             int l = 0;
-            int r=list.Count-1;
+            int r = list.Count - 1;
             int tmp;
             while (l < r)
             {
@@ -485,15 +485,15 @@ namespace MainMenu
             Console.WriteLine("=================================================\n");
         }
         //=====================
-        static void DeleteMenu(ref List<int> list )
+        static void DeleteMenu(ref List<int> list)
         {
-            if(list.Count == 0)
+            if (list.Count == 0)
             {
                 Console.WriteLine("The List is empty :)");
                 return;
             }
-            
-            while(true)
+
+            while (true)
             {
                 Console.Clear();
                 ShowDeleteMenu();
@@ -524,19 +524,19 @@ namespace MainMenu
             bool firstRemoved = false;
             List<int> newList = new List<int>();
 
-            for(int i=0; i<oldList.Count; i++)
+            for (int i = 0; i < oldList.Count; i++)
             {
-                if (oldList[i]==num)
+                if (oldList[i] == num)
                 {
                     found = true;
-                    if(!firstRemoved && choice == 'o')// هيدخل هنا مرة وحدة بس في حالة وجود الرقم فعلا
+                    if (!firstRemoved && choice == 'o')// هيدخل هنا مرة وحدة بس في حالة وجود الرقم فعلا
                     {
                         Console.WriteLine($"one occurrence of {num} has been deleted :)");
                         firstRemoved = true;
                         continue;
                     }
-                    else if(choice=='a')
-                        continue; 
+                    else if (choice == 'a')
+                        continue;
 
                 }
                 newList.Add(oldList[i]);// to add  الارقام ال مش بتساوي الرقم +    if i need to remove one occurance only and add thr rest of {num}s :)
@@ -544,13 +544,21 @@ namespace MainMenu
             }
             if (!found)
                 Console.WriteLine($"{num} is not found :)");
-            if(choice=='a')
+            if (choice == 'a')
                 Console.WriteLine($"all occurrences of {num} have been deleted :)");
 
             oldList = newList;
 
         }
         //=====================
-
+        static void ClearList(ref List<int> oldList)
+        {
+            List<int> newList = new List<int>(oldList.Count); // i chose the overload of the capacity = list.Count to avoid resizing the list when adding elements
+            oldList = newList;
+            // when i searched for clear method in the list class
+            // i found that it will set the count to 0
+            // but the capacity will remain the same :)
+            Console.WriteLine("The list has been cleared :)");
+        }
     }
 }
