@@ -257,7 +257,8 @@ namespace MainMenu
             Console.WriteLine("\n-_-_-_-_-_-_-_-_-_-_-_-_\n");
             List<int> sortedList = new List<int>();
             sortedList = list;
-            sortedList.Sort();//معلش هنا استخدمت الجاهزة على ما أعمل الميثود كمان شويه
+            //sortedList.Sort();//معلش هنا استخدمت الجاهزة على ما أعمل الميثود كمان شويه
+            MergeSort(sortedList, 0, sortedList.Count - 1);
             //-------------
             int num = ReadNumberForSearch();
             int index = BinarySearch(sortedList, num);
